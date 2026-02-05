@@ -2,64 +2,110 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Be My Valentine ❤️</title>
+<title>For Toshi ❤️</title>
+
 <style>
-    body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-        background: #ffe6f0;
-        overflow: hidden;
-    }
-    h1 {
-        margin-top: 100px;
-        color: #ff3366;
-    }
-    .btn {
-        padding: 15px 25px;
-        font-size: 18px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        margin: 20px;
-        position: absolute;
-    }
-    #yes {
-        background: #ff3366;
-        color: white;
-        position: static;
-    }
-    #no {
-        background: #ccc;
-    }
-    #result {
-        display: none;
-        margin-top: 50px;
-    }
-    img {
-        width: 250px;
-        margin-top: 20px;
-    }
+body {
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+}
+
+/* Title */
+h1 {
+    margin-top: 60px;
+    color: #fff;
+    font-size: 2.2em;
+    text-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Buttons */
+.btn {
+    padding: 15px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 20px;
+    position: absolute;
+    transition: 0.2s;
+}
+
+#yes {
+    background: #ff4d6d;
+    color: white;
+    position: static;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+#no {
+    background: #eee;
+}
+
+/* Result section */
+#result {
+    display: none;
+    margin-top: 30px;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+img {
+    width: 280px;
+    border-radius: 20px;
+    margin-top: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    color: #fff;
+    font-size: 18px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
 </style>
 </head>
 
 <body>
 
-<h1>Will you be my Valentine? ❤️</h1>
+<!-- Background music -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6b7a7e1b7a.mp3" type="audio/mpeg">
+</audio>
+
+<h1>Will you be my Valentine, Toshi? ❤️</h1>
 
 <button id="yes" class="btn" onclick="sayYes()">Yes 💖</button>
 <button id="no" class="btn" onmouseover="moveNo()">No 😜</button>
 
 <div id="result">
-    <h2>You made the right decision! ❤️</h2>
-    <p>I love you sooo much 🥰</p>
-    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+    <h2 style="color:white;">You made the right decision! ❤️</h2>
+    <p style="color:white;font-size:18px;">
+        I love you forever, Toshi 🥰
+    </p>
+
+    <!-- Upload this photo in GitHub repo as photo.jpg -->
+    <img src="photo.jpg" alt="Our Love">
 </div>
 
 <script>
 function moveNo() {
     const btn = document.getElementById("no");
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 100);
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
     btn.style.left = x + "px";
     btn.style.top = y + "px";
 }
@@ -67,7 +113,20 @@ function moveNo() {
 function sayYes() {
     document.getElementById("result").style.display = "block";
 }
+
+/* Floating heart text */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️ Toshi Tandon";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 18 + 14) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 350);
 </script>
 
 </body>
 </html>
+
