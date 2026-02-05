@@ -86,9 +86,11 @@ img {
 <body>
 
 <!-- 🎵 Soft romantic background music -->
-<audio autoplay loop>
+<!-- Background music -->
+<audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6b7a7e1b7a.mp3" type="audio/mpeg">
 </audio>
+
 
 <h1>Will you be my Valentine, Toshi? ❤️</h1>
 
@@ -121,7 +123,11 @@ function moveNo() {
 /* YES click reveal */
 function sayYes() {
     document.getElementById("result").style.display = "block";
+
+    // play music after user click (mobile allowed)
+    document.getElementById("bgMusic").play();
 }
+
 
 /* Floating hearts */
 setInterval(() => {
@@ -158,4 +164,5 @@ const timer = setInterval(() => {
 
 </body>
 </html>
+
 
