@@ -106,11 +106,17 @@ img {
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6b7a7e1b7a.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 💌 Tap to start screen -->
+<!-- 💌 Tap to start -->
 <div id="startScreen">Tap to open my heart ❤️</div>
 
-<!-- 🌹 Main Valentine content -->
+<!-- 🌹 Main content -->
 <div id="mainContent" style="display:none;">
+
+<!-- 🎵 Music play button (guaranteed mobile support) -->
+<button onclick="playMusic()" 
+style="padding:10px 18px;border:none;border-radius:10px;background:#ff4d6d;color:white;font-size:16px;">
+Play our song 🎵
+</button>
 
 <h1>Will you be my Valentine, Toshi? ❤️</h1>
 <div id="countdown"></div>
@@ -125,19 +131,23 @@ img {
         Can't wait to see you on <b>2 March 2026</b> 💞
     </p>
 
-    <!-- Your uploaded image name -->
     <img src="photo.jpeg" alt="Our Love">
 </div>
 
 </div>
 
 <script>
-/* Start screen → show page + play music */
+/* Start screen → show page */
 document.getElementById("startScreen").onclick = function () {
     document.getElementById("startScreen").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
-    document.getElementById("bgMusic").play();
 };
+
+/* Play music (works on all phones) */
+function playMusic() {
+    const music = document.getElementById("bgMusic");
+    music.play();
+}
 
 /* Move NO button */
 function moveNo() {
