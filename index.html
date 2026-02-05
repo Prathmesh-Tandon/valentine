@@ -13,6 +13,22 @@ body {
     background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
 }
 
+/* Opening screen */
+#startScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #ffdde1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    color: #ff4d6d;
+    font-weight: bold;
+    z-index: 999;
+    cursor: pointer;
+}
+
 /* Title */
 h1 {
     margin-top: 50px;
@@ -85,16 +101,18 @@ img {
 
 <body>
 
-<!-- 🎵 Soft romantic background music -->
-<!-- Background music -->
+<!-- 🎵 Background music -->
 <audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6b7a7e1b7a.mp3" type="audio/mpeg">
 </audio>
 
+<!-- 💌 Tap to start screen -->
+<div id="startScreen">Tap to open my heart ❤️</div>
+
+<!-- 🌹 Main Valentine content -->
+<div id="mainContent" style="display:none;">
 
 <h1>Will you be my Valentine, Toshi? ❤️</h1>
-
-<!-- ⏳ Countdown -->
 <div id="countdown"></div>
 
 <button id="yes" class="btn" onclick="sayYes()">Yes 💖</button>
@@ -103,14 +121,24 @@ img {
 <div id="result">
     <h2 style="color:white;">You made the right decision! ❤️</h2>
     <p style="color:white;font-size:18px;">
-        I love you forever, Toshi 🥰  
-        Can't wait to see you on **2 March 2026** 💞
+        I love you forever, Toshi 🥰<br>
+        Can't wait to see you on <b>2 March 2026</b> 💞
     </p>
 
+    <!-- Your uploaded image name -->
     <img src="photo.jpeg" alt="Our Love">
 </div>
 
+</div>
+
 <script>
+/* Start screen → show page + play music */
+document.getElementById("startScreen").onclick = function () {
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+    document.getElementById("bgMusic").play();
+};
+
 /* Move NO button */
 function moveNo() {
     const btn = document.getElementById("no");
@@ -123,11 +151,7 @@ function moveNo() {
 /* YES click reveal */
 function sayYes() {
     document.getElementById("result").style.display = "block";
-
-    // play music after user click (mobile allowed)
-    document.getElementById("bgMusic").play();
 }
-
 
 /* Floating hearts */
 setInterval(() => {
@@ -139,17 +163,16 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 6000);
 }, 350);
 
-/* ⏳ Countdown to 2 March 2026 */
+/* Countdown to 2 March 2026 */
 const meetDate = new Date("March 2, 2026 00:00:00").getTime();
 
-const timer = setInterval(() => {
+setInterval(() => {
     const now = new Date().getTime();
     const diff = meetDate - now;
 
     if (diff <= 0) {
         document.getElementById("countdown").innerHTML =
             "Yay! We meet today ❤️";
-        clearInterval(timer);
         return;
     }
 
@@ -164,5 +187,3 @@ const timer = setInterval(() => {
 
 </body>
 </html>
-
-
