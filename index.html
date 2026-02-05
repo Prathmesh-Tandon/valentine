@@ -15,10 +15,16 @@ body {
 
 /* Title */
 h1 {
-    margin-top: 60px;
+    margin-top: 50px;
     color: #fff;
     font-size: 2.2em;
-    text-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Countdown */
+#countdown {
+    color: white;
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 /* Buttons */
@@ -30,14 +36,12 @@ h1 {
     cursor: pointer;
     margin: 20px;
     position: absolute;
-    transition: 0.2s;
 }
 
 #yes {
     background: #ff4d6d;
     color: white;
     position: static;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 #no {
@@ -47,7 +51,7 @@ h1 {
 /* Result section */
 #result {
     display: none;
-    margin-top: 30px;
+    margin-top: 25px;
     animation: fadeIn 1.5s ease forwards;
 }
 
@@ -81,12 +85,15 @@ img {
 
 <body>
 
-<!-- Background music -->
+<!-- 🎵 Soft romantic background music -->
 <audio autoplay loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6b7a7e1b7a.mp3" type="audio/mpeg">
 </audio>
 
 <h1>Will you be my Valentine, Toshi? ❤️</h1>
+
+<!-- ⏳ Countdown -->
+<div id="countdown"></div>
 
 <button id="yes" class="btn" onclick="sayYes()">Yes 💖</button>
 <button id="no" class="btn" onmouseover="moveNo()">No 😜</button>
@@ -94,14 +101,15 @@ img {
 <div id="result">
     <h2 style="color:white;">You made the right decision! ❤️</h2>
     <p style="color:white;font-size:18px;">
-        I love you forever, Toshi 🥰
+        I love you forever, Toshi 🥰  
+        Can't wait to see you on **2 March 2026** 💞
     </p>
 
-    <!-- Upload this photo in GitHub repo as photo.jpg -->
-    <img src="photo.jpeg" alt="Our Love">
+    <img src="photo.jpg" alt="Our Love">
 </div>
 
 <script>
+/* Move NO button */
 function moveNo() {
     const btn = document.getElementById("no");
     const x = Math.random() * (window.innerWidth - 120);
@@ -110,24 +118,43 @@ function moveNo() {
     btn.style.top = y + "px";
 }
 
+/* YES click reveal */
 function sayYes() {
     document.getElementById("result").style.display = "block";
 }
 
-/* Floating heart text */
+/* Floating hearts */
 setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerText = "❤️ Toshi Tandon";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 18 + 14) + "px";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 6000);
 }, 350);
+
+/* ⏳ Countdown to 2 March 2026 */
+const meetDate = new Date("March 2, 2026 00:00:00").getTime();
+
+const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const diff = meetDate - now;
+
+    if (diff <= 0) {
+        document.getElementById("countdown").innerHTML =
+            "Yay! We meet today ❤️";
+        clearInterval(timer);
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const mins = Math.floor((diff / (1000 * 60)) % 60);
+
+    document.getElementById("countdown").innerHTML =
+        `⏳ Counting days to see you: <b>${days}d ${hours}h ${mins}m</b>`;
+}, 1000);
 </script>
 
 </body>
 </html>
-
-
